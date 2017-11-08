@@ -23,9 +23,6 @@
 #include <iostream>
 #include <string>
 
-template <typename anyID*, unsigned S>
-inline unsigned arraysize(const anyID*(&v)[S]) { return S; }
-
 static struct TS3Functions ts3Functions;
 
 #ifdef _WIN32
@@ -145,7 +142,6 @@ int ts3plugin_requestAutoload() {
 
 //Global Variables
 uint64 targetChannel = 0;
-#define MAX_ARRAYSIZE 50
 
 //Helper Functions
 bool isClientInList(anyID* clientList, anyID* clientID) {
@@ -283,7 +279,7 @@ void ts3plugin_onMenuItemEvent(uint64 serverConnectionHandlerID, enum PluginMenu
 
 void ts3plugin_onConnectStatusChangeEvent(uint64 serverConnectionHandlerID, int newStatus, unsigned int errorNumber)
 {
-	if (newStatus == STATUS_CONNECTION_ESTABLISHED)
+	if (newStatus == STATUS_CONNECTION_ESTABLISHED) //On new connection reset targetchannel
 		targetChannel = 0;
 }
 
